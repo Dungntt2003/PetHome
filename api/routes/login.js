@@ -4,10 +4,15 @@ const {
   registerNewUser,
   checkUserLogin,
   checkDoctorLogin,
+  updateUserById,
+  deleteUserById,
 } = require("../controllers/loginController");
 
 router.post("/register", registerNewUser);
 router.post("/login", checkUserLogin);
+router.get("/users", getUser);
+router.put("/users/:id", updateUserById);
+router.delete("/users/:id", deleteUserById);
 router.post("/login/doctor", checkDoctorLogin);
 
 module.exports = router;
