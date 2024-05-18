@@ -1,7 +1,6 @@
 const pool = require("../../db");
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
-const { createNewUser, checkUser, getAllUsers } = require("../queries/loginQuery");
 const {
   createNewUser,
   checkUser,
@@ -65,15 +64,6 @@ const checkUserLogin = (req, res, next) => {
   });
 };
 
-const getUser= (req, res, next) => {
-  pool.query(getAllUsers, (err, result) => {
-    if (err) return res.status(500).json({
-      message: err.message
-    })
-    return res.status(200).json(result.rows)
-  })
-}
-module.exports = { registerNewUser, checkUserLogin , getUser};
 const checkDoctorLogin = (req, res, next) => {
   const { email, password } = req.body;
   pool.query(checkDoctor, [email], (err, result) => {
