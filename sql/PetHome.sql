@@ -60,3 +60,16 @@ Insert into staff (email, password, name) values
 
 select * from staff;
 
+
+create table pet (
+	id SERIAL PRIMARY KEY,
+	name varchar(255) not null,
+	dob date CHECK (dob <= CURRENT_DATE),
+	gender varchar(255),
+	type varchar(255),
+	hobby varchar(255),
+	owner_id int not null,
+	foreign key (owner_id) references person(id)
+);
+
+select * from pet;

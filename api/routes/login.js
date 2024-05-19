@@ -14,6 +14,6 @@ router.post("/login", checkUserLogin);
 router.get("/users", getUser);
 router.put("/users/:id", updateUserById);
 router.delete("/users/:id", deleteUserById);
-router.post("/login/doctor", checkDoctorLogin);
+router.post("/login/doctors", checkDoctorLogin);
 
 module.exports = router;
