@@ -6,6 +6,7 @@ const {
   checkDoctorLogin,
   updateUserById,
   deleteUserById,
+  getUser,
 } = require("../controllers/loginController");
 
 router.post("/register", registerNewUser);
