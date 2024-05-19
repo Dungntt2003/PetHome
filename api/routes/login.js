@@ -4,6 +4,7 @@ const {
   registerNewUser,
   checkUserLogin,
   checkDoctorLogin,
+  getUser,
   updateUserById,
   deleteUserById,
   getUser,
