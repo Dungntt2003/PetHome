@@ -19,11 +19,30 @@ const getAllPet = (req, res, next) => {
         message: "Pet not found",
       });
     } else {
-      res.status(200).json(result.rows);
+      const data = result.rows.map((item) => item.id);
+      res.status(200).json(data);
     }
   });
 };
 
+const getPetById = (req, res, next) => {
+  const id = req.params.id;
+  pool.query(checkPetExist, [id], (err, result) => {
+    if (err) {
+      res.status(500).json({
+        message: err.message,
+      });
+    } else {
+      if (result.rows.length === 0) {
+        res.status(404).json({
+          message: "Pet not found",
+        });
+      } else {
+        res.status(200).json(result.rows[0]);
+      }
+    }
+  });
+};
 const createPet = (req, res, next) => {
   const { name, dob, gender, type, hobby, owner_id } = req.body;
 
@@ -107,4 +126,10 @@ const deletePetById = (req, res, next) => {
   });
 };
 
-module.exports = { createPet, getAllPet, updatePetById, deletePetById };
+module.exports = {
+  createPet,
+  getAllPet,
+  updatePetById,
+  deletePetById,
+  getPetById,
+};
