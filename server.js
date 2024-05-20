@@ -6,6 +6,7 @@ const port = 8080;
 
 const LoginRoute = require("./api/routes/login");
 const PetRoute = require("./api/routes/pet");
+const bookDate = require("./api/routes/bookSchedule");
 
 app.use(express.json());
 app.use(morgan("combined"));
@@ -26,6 +27,7 @@ app.use((req, res, next) => {
 });
 
 app.use("/pets", PetRoute);
+app.use("/bookDate", bookDate);
 app.use("/", LoginRoute);
 
 app.listen(port, () => {
