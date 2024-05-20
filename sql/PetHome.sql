@@ -162,12 +162,14 @@ create table bookschedule (
 	pet_id int,
 	doctor_id int,
 	bookDate date,
-	isAccept boolean,
+	result varchar(500) default 'Đang xét duyệt',
 	type varchar(10),
+	 CONSTRAINT check_date CHECK (bookDate >= CURRENT_DATE),
 	foreign key (pet_id) references pet(id),
 	foreign key (doctor_id) references doctor(id),
 	foreign key (type) references sicktype(id),
 	foreign key (type) references servicetype(id),
-	foreign key (type) references hotel(id)
+	foreign key (type) references hotel(id),
+	unique (pet_id, bookDate, type)
 );
 select * from bookSchedule;
