@@ -19,8 +19,7 @@ const getAllPet = (req, res, next) => {
         message: "Pet not found",
       });
     } else {
-      const data = result.rows.map((item) => item.id);
-      res.status(200).json(data);
+      res.status(200).json(result.rows);
     }
   });
 };
@@ -38,7 +37,7 @@ const getPetById = (req, res, next) => {
           message: "Pet not found",
         });
       } else {
-        res.status(200).json(result.rows[0]);
+        res.status(200).json(result.rows);
       }
     }
   });
