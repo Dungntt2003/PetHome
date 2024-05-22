@@ -50,18 +50,13 @@ const checkUserLogin = (req, res, next) => {
           });
           return;
         }
-<<<<<<< HEAD
         if (result1) {
-          res.status(200).json(result.rows);
-=======
-        if (result) {
-          res.status(200).json([
+          res.status(200).json(
             {
               message: "Login successfully",
               id: id,
             },
-          ]);
->>>>>>> e1f50ab184923cda69d1acfd8bff434f6a523147
+          );
           return;
         }
         res.status(401).json([{
