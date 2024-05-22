@@ -4,9 +4,11 @@ const {
   createNewBook,
   updateBookById,
   deleteBookById,
+  getBookScheduleByUser,
 } = require("../controllers/bookScheduleController");
 
 router.post("/", createNewBook);
+router.get("/:id", getBookScheduleByUser);
 router.put("/:id", updateBookById);
 router.delete("/:id", deleteBookById);
 

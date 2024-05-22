@@ -4,7 +4,21 @@ const {
   createBook,
   updateBook,
   deleteBook,
+  getBookByUser,
 } = require("../queries/bookScheduleQuery");
+
+const getBookScheduleByUser = (req, res, next) => {
+  const id = req.params.id;
+  pool.query(getBookByUser, [id], (err, results) => {
+    if (err) {
+      res.status(500).json({
+        message: err.message,
+      });
+    } else {
+      res.status(200).json(results.rows);
+    }
+  });
+};
 
 const createNewBook = (req, res, next) => {
   const { pet_id, bookDate, type } = req.body;
@@ -14,6 +28,7 @@ const createNewBook = (req, res, next) => {
     } else {
       res.status(200).json({
         message: "Book scheduled successfully",
+        id: results.rows[0].id,
       });
     }
   });
@@ -46,4 +61,9 @@ const deleteBookById = (req, res, next) => {
   });
 };
 
-module.exports = { createNewBook, updateBookById, deleteBookById };
+module.exports = {
+  createNewBook,
+  updateBookById,
+  deleteBookById,
+  getBookScheduleByUser,
+};
