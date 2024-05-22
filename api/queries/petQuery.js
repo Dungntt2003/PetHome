@@ -1,5 +1,5 @@
 const createNewPet =
-  "INSERT INTO pet (name, dob, gender,type, hobby, owner_id) VALUES ($1,$2,$3,$4,$5, $6)";
+  "INSERT INTO pet (name, dob, gender,type, hobby, owner_id) VALUES ($1,$2,$3,$4,$5, $6) RETURNING id";
 
 const getPet = "SELECT * From pet WHERE owner_id = $1";
 

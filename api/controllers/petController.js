@@ -54,8 +54,10 @@ const createPet = (req, res, next) => {
           message: err.message,
         });
       } else {
+        // console.log(result.rows[0].id);
         res.status(200).json({
           message: "Pet created successfully",
+          id: result.rows[0].id,
         });
       }
     }
