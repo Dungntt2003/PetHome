@@ -26,10 +26,12 @@ const createNewBook = (req, res, next) => {
     if (err) {
       res.status(500).json({ message: err.message });
     } else {
-      res.status(200).json({
-        message: "Book scheduled successfully",
-        id: results.rows[0].id,
-      });
+      res.status(200).json([
+        {
+          message: "Book scheduled successfully",
+          id: results.rows[0].id,
+        },
+      ]);
     }
   });
 };
