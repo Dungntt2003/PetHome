@@ -19,66 +19,23 @@ const {
 } = require("../queries/serviceListQuery");
 
 const getAllDataServices = (req, res, next) => {
-  let dataService = [];
-  let service1 = [];
-  let service2 = [];
-  let service3 = [];
   pool.query(getAllServices, (err, results) => {
     if (err) {
       res.status(500).json({
         message: err.message,
       });
-    } else {
-      dataService = results.rows;
-      // console.log(dataService);
-      pool.query(getHealthService, (err, res1) => {
-        if (err) {
-          res.status(500).json({
-            message: err.message,
-          });
-        } else {
-          service1 = res1.rows;
-          // res.status(200).json(service1);
-          pool.query(getSalonService, (err, res2) => {
-            if (err) {
-              res.status(500).json({
-                message: err.message,
-              });
-            } else {
-              service2 = res2.rows;
-              pool.query(getHotelService, (err, res3) => {
-                if (err) {
-                  res.status(500).json({
-                    message: err.message,
-                  });
-                } else {
-                  service3 = res3.rows;
-                  for (let data of dataService) {
-                    if (data.id === 1) {
-                      dataService[0] = {
-                        ...dataService[0],
-                        data: service1,
-                      };
-                    } else if (data.id === 2) {
-                      dataService[1] = {
-                        ...dataService[1],
-                        data: service2,
-                      };
-                    } else {
-                      dataService[2] = {
-                        ...dataService[2],
-                        data: service3,
-                      };
-                    }
-                  }
-                  res.status(200).json(dataService);
-                }
-              });
-            }
-          });
-        }
+    } else res.status(200).json(results.rows);
+  });
+};
+
+const getServiceById = (req, res, next) => {
+  const id = req.params.id;
+  pool.query(getAService, [id], (err, results) => {
+    if (err) {
+      res.status(500).json({
+        message: err.message,
       });
-    }
+    } else res.status(200).json(results.rows);
   });
 };
 
@@ -344,4 +301,5 @@ module.exports = {
   updateSalon,
   updateHotel,
   updateServiceById,
+  getServiceById,
 };

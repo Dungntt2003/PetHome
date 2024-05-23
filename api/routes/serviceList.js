@@ -11,10 +11,12 @@ const {
   updateSalon,
   updateHotel,
   deleteServiceById,
+  getServiceById,
 } = require("../controllers/serviceListController");
 
 router.get("/", getAllDataServices);
 router.post("/", createNewService);
+router.get("/:id", getServiceById);
 router.post("/health", createHealthService);
 router.post("/salon", createSalonService);
 router.post("/hotel", createHotelService);
