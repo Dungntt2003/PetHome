@@ -37,7 +37,14 @@ const getPetById = (req, res, next) => {
           message: "Pet not found",
         });
       } else {
-        res.status(200).json(result.rows);
+        res.status(200).json({
+          name: result.rows[0].name,
+          dob: result.rows[0].dob,
+          gender: result.rows[0].gender,
+          type: result.rows[0].type,
+          hobby: result.rows[0].hobby,
+          owner_id: result.rows[0].owner_id,
+        });
       }
     }
   });
