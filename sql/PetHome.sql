@@ -177,7 +177,7 @@ insert into servicetype (id,process, quantitative) values
 ('SE11', 'Nhuộm lông với các màu sắc an toàn cho thú cưng', 2),
 ('SE12', 'như quy trình tắm sấy', 2);
 
-drop table servicetype;
+
 -- create table hotel using auto id start with "HO"
 create table hotel(
 	id VARCHAR(10) PRIMARY KEY,
@@ -206,7 +206,6 @@ create table inhotel (
 	unique (id, pet_id, starttime)
 );
 select * from inhotel;
-drop table inhotel;
 
 -- create trigger when delete sservice_item
 
@@ -245,7 +244,6 @@ create table bookschedule (
 	unique (pet_id, bookDate, type)
 );
 select * from bookschedule;
-drop table bookschedule;
 
 SELECT doctor_id, name,bookdate, result, bookschedule.type FROM bookschedule join pet on bookschedule.pet_id = pet.id where owner_id = 6;
 

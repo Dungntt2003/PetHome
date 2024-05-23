@@ -51,12 +51,10 @@ const checkUserLogin = (req, res, next) => {
           return;
         }
         if (result) {
-          res.status(200).json([
-            {
-              message: "Login successfully",
-              id: id,
-            },
-          ]);
+          res.status(200).json({
+            message: "Login successfully",
+            id: id,
+          });
           return;
         }
         res.status(401).json({
