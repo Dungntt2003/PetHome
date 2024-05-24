@@ -30,7 +30,35 @@ const getAllDataServices = (req, res, next) => {
 
 const getServiceById = (req, res, next) => {
   const id = req.params.id;
-  pool.query(getAService, [id], (err, results) => {
+  if (id === 1) {
+    pool.query(getHealthService, (err, results) => {
+      if (err) {
+        res.status(500).json({
+          message: err.message,
+        });
+      } else res.status(200).json(results.rows);
+    });
+  } else if (id === 2) {
+    pool.query(getSalonService, (err, results) => {
+      if (err) {
+        res.status(500).json({
+          message: err.message,
+        });
+      } else res.status(200).json(results.rows);
+    });
+  } else {
+    pool.query(getHotelService, (err, results) => {
+      if (err) {
+        res.status(500).json({
+          message: err.message,
+        });
+      } else res.status(200).json(results.rows);
+    });
+  }
+};
+
+const getHealth = (req, res, next) => {
+  pool.query(getHealthService, (err, results) => {
     if (err) {
       res.status(500).json({
         message: err.message,
@@ -39,6 +67,25 @@ const getServiceById = (req, res, next) => {
   });
 };
 
+const getSalon = (req, res, next) => {
+  pool.query(getSalonService, (err, results) => {
+    if (err) {
+      res.status(500).json({
+        message: err.message,
+      });
+    } else res.status(200).json(results.rows);
+  });
+};
+
+const getHotel = (req, res, next) => {
+  pool.query(getHotelService, (err, results) => {
+    if (err) {
+      res.status(500).json({
+        message: err.message,
+      });
+    } else res.status(200).json(results.rows);
+  });
+};
 const createNewService = (req, res, next) => {
   const { name, introduction } = req.body;
   pool.query(insertNewService, [name, introduction], (err, result) => {
@@ -302,4 +349,7 @@ module.exports = {
   updateHotel,
   updateServiceById,
   getServiceById,
+  getHealth,
+  getSalon,
+  getHotel,
 };

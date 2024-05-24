@@ -4,6 +4,14 @@ CREATE table person (
   password VARCHAR(255) NOT NULL
 );
 
+alter table person 
+add column name varchar(100),
+add column dob date check (dob <= CURRENT_DATE),
+add column gender varchar(10),
+add column phone varchar(10),
+add column membership varchar(5) default 'Đồng',
+add column address varchar(500);
+
 select * from person;
 
 CREATE table doctor (

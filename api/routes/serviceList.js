@@ -12,6 +12,9 @@ const {
   updateHotel,
   deleteServiceById,
   getServiceById,
+  getSalon,
+  getHealth,
+  getHotel,
 } = require("../controllers/serviceListController");
 
 router.get("/", getAllDataServices);
