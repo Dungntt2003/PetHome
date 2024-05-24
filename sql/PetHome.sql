@@ -29,15 +29,34 @@ CREATE table doctor (
 	experienceYear int
 );
 
-Insert into doctor (email, password, name) values 
-	('nam.nv211@gmail.com', 'namdepzai', 'Nguyễn Văn Nam'), 
-	('anh.pv212@gmail.com', '123456', 'Phạm Vân Anh'),
-	('thien.ph213@gmail.com', 'tester', 'Phạm Hữu Thiên'),
-	('hoang.nvt221@gmail.com', 'dk56#', 'Nguyễn Văn Thái Hoàn'),
-	('mang.ta222@gmail.com', 'huangon', 'Trần Anh Mang'),
-	('an.nvp223@gmail.com', 'lopdiu', 'Nguyễn Văn Phú An'),
-	('thu.nna224@gmail.com', 'bobdepzai', 'Nguyễn Ngọc Anh Thư'),
-	('dung.ntt225@gmail.com', 'uiux', 'Nguyễn Thị Thùy Dung');
+-- create trigger for update experience year when new year
+
+CREATE OR REPLACE FUNCTION update_experience_year()
+RETURNS TRIGGER AS $$
+DECLARE
+    a CONSTANT INT := 1;
+BEGIN
+    IF EXTRACT(YEAR FROM CURRENT_DATE) <> EXTRACT(YEAR FROM CURRENT_DATE) - a THEN
+        NEW.experienceyear := NEW.experienceyear + 1;
+    END IF;
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER update_experienceyear_trigger
+BEFORE INSERT OR UPDATE ON doctor
+FOR EACH ROW
+EXECUTE PROCEDURE update_experience_year();
+
+Insert into doctor (email, password, name, dob, gender, phone, address, university, graduationyear, achievements, experienceyear) values 
+	('nam.nv211@gmail.com', 'namdepzai', 'Nguyễn Văn Nam', '1990-10-10', 'male', '092288288', '7 HN', 'HUST', 2020, '1st reward', 3), 
+	('anh.pv212@gmail.com', '123456', 'Phạm Vân Anh','1989-10-10', 'female', '092288288', '7 HN', 'HUST', 2020, '1st reward', 3),
+	('thien.ph213@gmail.com', 'tester', 'Phạm Hữu Thiên', '1980-10-10', 'male', '092288288', '7 HN', 'HUST', 2020, '1st reward', 3),
+	('hoang.nvt221@gmail.com', 'dk56#', 'Nguyễn Văn Thái Hoàn', '1975-10-10', 'male', '092288288', '7 HN', 'HUST', 2020, '1st reward', 3),
+	('mang.ta222@gmail.com', 'huangon', 'Trần Anh Mang', '1960-9-8', 'male', '092288288', '7 HN', 'HUST', 2020, '1st reward', 3),
+	('an.nvp223@gmail.com', 'lopdiu', 'Nguyễn Văn Phú An', '1979-9-10', 'male', '092288288', '7 HN', 'HUST', 2020, '1st reward', 3),
+	('thu.nna224@gmail.com', 'bobdepzai', 'Nguyễn Ngọc Anh Thư', '1989-10-11', 'female', '092288288', '7 HN', 'HUST', 2020, '1st reward', 3),
+	('dung.ntt225@gmail.com', 'uiux', 'Nguyễn Thị Thùy Dung', '1938-1-1', 'female', '092288288', '7 HN', 'HUST', 2020, '1st reward', 3);
 
 select * from doctor;
 
@@ -227,13 +246,15 @@ CREATE OR REPLACE FUNCTION process_emp_service() RETURNS TRIGGER AS $$
     
     DELETE FROM bookschedule
     WHERE bookschedule.type = OLD.id;
+	RETURN OLD;
     END;
 $$ LANGUAGE plpgsql;
 
 CREATE TRIGGER emp_service
-AFTER DELETE ON service_item
+BEFORE DELETE ON service_item
 FOR EACH ROW EXECUTE FUNCTION process_emp_service();
 
+DROP TRIGGER emp_service ON service_item;
 
 create table bookschedule (
 	id SERIAL PRIMARY KEY,
@@ -252,3 +273,5 @@ select * from bookschedule;
 
 SELECT doctor_id, name,bookdate, result, bookschedule.type FROM bookschedule join pet on bookschedule.pet_id = pet.id where owner_id = 6;
 
+-- test trigger
+delete from service_item where id = 'HE01';

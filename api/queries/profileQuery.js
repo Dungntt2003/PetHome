@@ -9,4 +9,12 @@ const getInfo =
 const getInfoDoctor =
   "SELECT email, name, dob, gender, phone, address, university, graduationyear, achievements, experienceyear from doctor where id = $1";
 
-module.exports = { insertUserInfo, updatePass, getInfo, getInfoDoctor };
+const updateInfoDoctor =
+  "UPDATE doctor SET dob = $1, gender= $2, phone = $3, address = $4, achievements = $5 where id = $6";
+module.exports = {
+  insertUserInfo,
+  updatePass,
+  getInfo,
+  getInfoDoctor,
+  updateInfoDoctor,
+};
