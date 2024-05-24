@@ -7,6 +7,8 @@ const {
   getInfo,
   getInfoDoctor,
   updateInfoDoctor,
+  getInfoStaff,
+  updateInfoStaff,
 } = require("../queries/profileQuery");
 
 const addUserInfo = (req, res, next) => {
@@ -91,10 +93,42 @@ const updateDoctorInfo = (req, res, next) => {
     }
   );
 };
+
+const getStaffInfo = (req, res, next) => {
+  const id = req.params.id;
+  pool.query(getInfoStaff, [id], (err, result) => {
+    if (err) {
+      res.status(500).json({
+        message: err.message,
+      });
+    } else res.status(200).json(result.rows[0]);
+  });
+};
+
+const updateStaffInfo = (req, res, next) => {
+  const id = req.params.id;
+  const { dob, gender, phone, address } = req.body;
+  pool.query(
+    updateInfoStaff,
+    [dob, gender, phone, address, id],
+    (err, result) => {
+      if (err) {
+        res.status(500).json({
+          message: err.message,
+        });
+      } else
+        res.status(200).json({
+          message: "Update staff info successfully",
+        });
+    }
+  );
+};
 module.exports = {
   addUserInfo,
   changePassword,
   getUserInfo,
   getDoctorInfo,
   updateDoctorInfo,
+  getStaffInfo,
+  updateStaffInfo,
 };

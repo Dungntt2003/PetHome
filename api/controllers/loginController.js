@@ -4,10 +4,8 @@ const saltRounds = 10;
 const {
   createNewUser,
   checkUser,
-  getAllUsers,
   checkDoctor,
-  updateUser,
-  deleteUser,
+  checkStaff,
 } = require("../queries/loginQuery");
 
 const registerNewUser = (req, res, next) => {
@@ -73,20 +71,6 @@ const checkUserLogin = (req, res, next) => {
   });
 };
 
-const getUser = (req, res, next) => {
-  pool.query(getAllUsers, (err, result) => {
-    if (err)
-      return res.status(500).json({
-        message: err.message,
-      });
-    if (result.rows.length === 0) {
-      res.status(404).json({
-        message: "No users found",
-      });
-    }
-    return res.status(200).json(result.rows);
-  });
-};
 const checkDoctorLogin = (req, res, next) => {
   const { email, password } = req.body;
   pool.query(checkDoctor, [email], (err, result) => {
@@ -94,62 +78,54 @@ const checkDoctorLogin = (req, res, next) => {
       res.status(500).json({
         message: err.message,
       });
-    if (result.rows.length === 0)
+    else if (result.rows.length === 0)
       res.status(404).json({
         message: "Doctor not found",
       });
     else {
       const realPass = result.rows[0].password;
+      const id = result.rows[0].id;
       if (realPass != password)
         res.status(409).json({
           message: "Password mismatch",
         });
       res.status(200).json({
         message: "Login successfully",
+        id: id,
       });
     }
-  });
-};
-const updateUserById = (req, res, next) => {
-  const id = req.params.id;
-  const { password } = req.body;
-  bcrypt.hash(password, saltRounds, function (err, hash) {
-    if (err) {
-      return res.status(403).json({
-        message: err.message,
-      });
-    }
-    pool.query(updateUser, [hash, id], (error, result) => {
-      if (error) {
-        res.status(500).json({
-          error: error.message,
-        });
-      } else
-        res.status(200).json({
-          message: "Update user successfully completed",
-        });
-    });
   });
 };
 
-const deleteUserById = (req, res, next) => {
-  const id = req.params.id;
-  pool.query(deleteUser, [id], (error, result) => {
-    if (error) {
+const checkStaffLogin = (req, res, next) => {
+  const { email, password } = req.body;
+  pool.query(checkStaff, [email], (err, result) => {
+    if (err)
       res.status(500).json({
-        error: error.message,
+        message: err.message,
       });
-    } else
+    else if (result.rows.length === 0)
+      res.status(404).json({
+        message: "Staff not found",
+      });
+    else {
+      const realPass = result.rows[0].password;
+      const id = result.rows[0].id;
+      if (realPass != password)
+        res.status(409).json({
+          message: "Password mismatch",
+        });
       res.status(200).json({
-        message: "Delete user successfully completed",
+        message: "Login successfully",
+        id: id,
       });
+    }
   });
 };
+
 module.exports = {
   registerNewUser,
   checkUserLogin,
   checkDoctorLogin,
-  getUser,
-  updateUserById,
-  deleteUserById,
+  checkStaffLogin,
 };

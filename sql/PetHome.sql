@@ -72,15 +72,15 @@ CREATE table staff (
 );
 
 
-Insert into staff (email, password, name) values 
-	('lam.nv@gmail.com', 'namdepzai', 'Nguyễn Văn Lâm'), 
-	('chau.ntmc@gmail.com', '123456', 'Nguyễn Thị Minh Châu'),
-	('nhung.nt@gmail.com', 'tester', 'Nguyễn Thị Nhung'),
-	('phuc.dth@gmail.com', 'dk56#', 'Đinh Thị Hồng Phúc'),
-	('anh.tt@gmail.com', 'huangon', 'Trần Trung Anh'),
-	('duy.vd@gmail.com', 'lopdiu', 'Vũ Đức Duy'),
-	('tuan.nm@gmail.com', 'bobdepzai', 'Nguyễn Mạnh Tuấn'),
-	('thao.ntn@gmail.com', 'uiux', 'Nguyễn Thị Ngọc Thảo');
+Insert into staff (email, password, name, dob, gender, phone, address) values 
+	('lam.nv@gmail.com', 'namdepzai', 'Nguyễn Văn Lâm', '1990-10-10','male', '0909029929', '9 HHN'), 
+	('chau.ntmc@gmail.com', '123456', 'Nguyễn Thị Minh Châu', '1990-10-10','male', '0909029929', '9 HHN'),
+	('nhung.nt@gmail.com', 'tester', 'Nguyễn Thị Nhung', '1990-10-10','male', '0909029929', '9 HHN'),
+	('phuc.dth@gmail.com', 'dk56#', 'Đinh Thị Hồng Phúc', '1990-10-10','male', '0909029929', '9 HHN'),
+	('anh.tt@gmail.com', 'huangon', 'Trần Trung Anh', '1990-10-10','male', '0909029929', '9 HHN'),
+	('duy.vd@gmail.com', 'lopdiu', 'Vũ Đức Duy', '1990-10-10','male', '0909029929', '9 HHN'),
+	('tuan.nm@gmail.com', 'bobdepzai', 'Nguyễn Mạnh Tuấn', '1990-10-10','male', '0909029929', '9 HHN'),
+	('thao.ntn@gmail.com', 'uiux', 'Nguyễn Thị Ngọc Thảo', '1990-10-10','male', '0909029929', '9 HHN');
 
 select * from staff;
 
