@@ -20,6 +20,9 @@ const {
 router.get("/", getAllDataServices);
 router.post("/", createNewService);
 router.get("/:id", getServiceById);
+router.get("/health", getHealth);
+router.get("/salon", getSalon);
+router.get("/hotel", getHotel);
 router.post("/health", createHealthService);
 router.post("/salon", createSalonService);
 router.post("/hotel", createHotelService);

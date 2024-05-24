@@ -30,7 +30,8 @@ const getAllDataServices = (req, res, next) => {
 
 const getServiceById = (req, res, next) => {
   const id = req.params.id;
-  if (id === 1) {
+  // console.log(typeof id);
+  if (id === "1") {
     pool.query(getHealthService, (err, results) => {
       if (err) {
         res.status(500).json({
@@ -38,7 +39,7 @@ const getServiceById = (req, res, next) => {
         });
       } else res.status(200).json(results.rows);
     });
-  } else if (id === 2) {
+  } else if (id == "2") {
     pool.query(getSalonService, (err, results) => {
       if (err) {
         res.status(500).json({
