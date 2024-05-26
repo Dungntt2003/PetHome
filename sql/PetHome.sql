@@ -225,7 +225,6 @@ create table inhotel (
 	pet_id int not null,
 	starttime date,
 	endtime date,
-	price int,
 	hotel_id varchar(10),
 	foreign key (pet_id) references pet(id),
 	foreign key (hotel_id) references hotel(id),
