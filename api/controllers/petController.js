@@ -43,6 +43,7 @@ const getPetById = (req, res, next) => {
           gender: result.rows[0].gender,
           type: result.rows[0].type,
           hobby: result.rows[0].hobby,
+          weight: result.row[0].weight,
           owner_id: result.rows[0].owner_id,
         });
       }
@@ -54,7 +55,7 @@ const createPet = (req, res, next) => {
 
   pool.query(
     createNewPet,
-    [name, dob, gender, type, hobby, owner_id],
+    [name, dob, gender, type, hobby, weight, owner_id],
     (err, result) => {
       if (err) {
         res.status(500).json({
@@ -88,9 +89,10 @@ const updatePetById = (req, res, next) => {
       const gender = req.body.gender;
       const type = req.body.type;
       const hobby = req.body.hobby;
+      const weight = req.body.weight;
       pool.query(
         updatePet,
-        [name, dob, gender, type, hobby, id],
+        [name, dob, gender, type, hobby, weight, id],
         (err, result) => {
           if (err) {
             res.status(500).json({

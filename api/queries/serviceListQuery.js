@@ -1,9 +1,9 @@
 const getAllServices = "SELECT * FROM service_list";
 const getAService = "SELECT * FROM service_item WHERE service_id = $1";
-const getHealthService = "SELECT * FROM service_item join sicktype using (id)";
+const getHealthService = "SELECT * FROM sicktype join service_item using (id)";
 const getSalonService =
-  "SELECT * FROM service_item join servicetype using (id)";
-const getHotelService = "SELECT * FROM service_item join hotel using (id)";
+  "SELECT * FROM servicetype join service_item using (id)";
+const getHotelService = "SELECT * FROM hotel join service_item using (id)";
 const insertNewService =
   "INSERT INTO service_list (name, introduction) VALUES ($1,$2) RETURNING id";
 const insertSubService =
