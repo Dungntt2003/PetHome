@@ -95,6 +95,8 @@ create table pet (
 	owner_id int not null,
 	foreign key (owner_id) references person(id)
 );
+alter table pet
+add column weight real;
 
 select * from pet;
 
