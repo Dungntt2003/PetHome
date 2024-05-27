@@ -11,10 +11,6 @@ const {
   updateBookSuccess,
   getAllBookDoctor,
   updateBookSuccessv2,
-  updateInHotel,
-  updateInHotelv2,
-
-  createInHotel,
 } = require("../queries/bookScheduleQuery");
 
 const createBookByStaff = (req, res, next) => {
@@ -82,26 +78,11 @@ const createNewBook = (req, res, next) => {
     if (err) {
       res.status(500).json({ message: err.message });
     } else {
-      if (type.startsWith("HO")) {
-        pool.query(createInHotel, [pet_id, bookDate], (error, res1) => {
-          if (error) {
-            res.status(500).json({
-              message: error.message,
-            });
-          } else {
-            const id = res1.rows[0].id;
-            res.status(200).json({
-              message: "Book scheduled successfully",
-              id: id,
-              book_id: results.rows[0].id,
-            });
-          }
-        });
-      } else
-        res.status(200).json({
-          message: "Book scheduled successfully",
-          id: results.rows[0].id,
-        });
+      const id = results.rows[0].id;
+      res.status(200).json({
+        message: "Created book scheduled successfully",
+        id: id,
+      });
     }
   });
 };
@@ -136,7 +117,7 @@ const updateBookSuccessStaff = (req, res, next) => {
 
 const updateBookSuccessStaffv2 = (req, res, next) => {
   const id = req.params.id;
-  pool.query(updateBookSuccessStaffv2, [id], (err, result) => {
+  pool.query(updateBookSuccessv2, [id], (err, result) => {
     if (err) {
       res.status(500).json({ message: err.message });
     } else
@@ -159,19 +140,6 @@ const updateBookFailStaff = (req, res, next) => {
   });
 };
 
-const updateInCage = (req, res, next) => {
-  const id = req.params.id;
-  const { endtime, hotel_id } = req.body;
-  pool.query(updateInHotel, [endtime, hotel_id, id], (err, result) => {
-    if (err) {
-      res.status(500).json({ message: err.message });
-    } else {
-      res.status(200).json({
-        message: "in cage updated successfully",
-      });
-    }
-  });
-};
 const deleteBookById = (req, res, next) => {
   const id = req.params.id;
   pool.query(deleteBook, [id], (err, result) => {
@@ -196,5 +164,4 @@ module.exports = {
   updateBookSuccessStaffv2,
   updateBookFailStaff,
   getAllBookForDoctor,
-  updateInCage,
 };

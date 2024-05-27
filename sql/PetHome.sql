@@ -222,7 +222,7 @@ insert into hotel (id, diet, takeExercise,airconditioning, heating, clean, camer
 drop table hotel;
 create table inhotel (
 	id SERIAL PRIMARY KEY,
-	pet_id int not null,
+	pet_id int,
 	starttime date,
 	endtime date,
 	hotel_id varchar(10),
@@ -230,7 +230,10 @@ create table inhotel (
 	foreign key (hotel_id) references hotel(id),
 	unique (id, pet_id, starttime)
 );
+insert into inhotel (hotel_id) values ('HO13'), ('HO13') , ('HO13') , 
+('HO13') , ('HO13') , ('HO14') , ('HO14') , ('HO14') , ('HO14') , ('HO14') ;
 select * from inhotel;
+
 
 -- create trigger when delete sservice_item
 
@@ -272,7 +275,3 @@ create table bookschedule (
 );
 select * from bookschedule;
 
-SELECT doctor_id, name,bookdate, result, bookschedule.type FROM bookschedule join pet on bookschedule.pet_id = pet.id where owner_id = 6;
-
--- test trigger
-delete from service_item where id = 'HE01';

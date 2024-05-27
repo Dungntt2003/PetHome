@@ -19,13 +19,6 @@ const updateBookSuccessv2 =
 const updateBookFail =
   "UPDATE bookschedule SET result = 'Từ chối' WHERE id = $1 ";
 
-const createInHotel =
-  "INSERT INTO inhotel (pet_id, starttime) VALUES ($1, $2)  RETURNING id;";
-const updateInHotel =
-  "UPDATE inhotel SET pet_id = $1, starttime = $2 WHERE id = $1";
-const updateInHotelv2 =
-  "UPDATE inhotel SET endtime = $1, hotel_id = $2 WHERE id = $3";
-
 module.exports = {
   createBook,
   updateBook,
@@ -37,7 +30,4 @@ module.exports = {
   updateBookSuccessv2,
   updateBookFail,
   getAllBookDoctor,
-  updateInHotel,
-  createInHotel,
-  updateInHotelv2,
 };
