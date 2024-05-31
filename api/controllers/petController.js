@@ -51,7 +51,7 @@ const getPetById = (req, res, next) => {
   });
 };
 const createPet = (req, res, next) => {
-  const { name, dob, gender, type, hobby, owner_id } = req.body;
+  const { name, dob, gender, type, hobby, weight, owner_id } = req.body;
 
   pool.query(
     createNewPet,
