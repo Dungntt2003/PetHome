@@ -28,6 +28,7 @@ const createBookByStaff = (req, res, next) => {
         res.status(200).json({
           message: "Book scheduled successfully",
           id: id,
+          result: "Thành công",
         });
       }
     }
@@ -82,6 +83,7 @@ const createNewBook = (req, res, next) => {
       res.status(200).json({
         message: "Created book scheduled successfully",
         id: id,
+        result: "Đang xét duyệt",
       });
     }
   });
