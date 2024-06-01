@@ -3,7 +3,7 @@ const createBook =
 const createBookv2 =
   "INSERT INTO bookschedule (pet_id,  doctor_id, bookDate, result, type) VALUES ($1, $2, $3,'Thành công', $4) RETURNING id;";
 const getBookByUser =
-  "SELECT doctor_id, name,bookdate, result, bookschedule.type FROM bookschedule join pet on bookschedule.pet_id = pet.id where owner_id = $1";
+  "SELECT bookschedule.id,doctor_id, name,bookdate, result, bookschedule.type FROM bookschedule join pet on bookschedule.pet_id = pet.id where owner_id = $1";
 const updateBook =
   "UPDATE bookschedule SET pet_id = $1, bookDate = $2, type = $3 WHERE id = $4";
 

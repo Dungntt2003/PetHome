@@ -278,3 +278,42 @@ select * from bookschedule;
 ALTER TABLE bookschedule
 ALTER COLUMN bookDate TYPE timestamp;
 
+
+-- create table for medical examination process
+create table medicalProcess (
+	id serial primary key,
+	pet_id int,
+	doctor_id int,
+	startTime timestamp,
+	endTime timestamp,
+	type varchar(10),
+	symptom varchar(100),
+	behavior_change varchar(100),
+	energy varchar(100),
+	weight real,
+	skin_check varchar(100),
+	nose_check varchar(100),
+	temperature real,
+	heart_beat real,
+	breath_beat real,
+	touch_check varchar(500),
+	blood_check varchar(100),
+	urine_check varchar(100),
+	digest_check varchar(100),
+	stool_check varchar(100),
+	supersonic varchar(100),
+	x_ray varchar(100),
+	sick varchar(100),
+	medicine_name varchar(100),
+	amount varchar(100),
+	note varchar(500),
+	diet varchar(100),
+	diet_amount varchar(100),
+	diet_time varchar(100),
+	practice varchar(100),
+	practice_time varchar(100),
+	practice_level varchar(100),
+	re_examDay timestamp
+);
+
+select * from medicalProcess;
