@@ -9,8 +9,10 @@ const {
   updateDoctorInfo,
   getStaffInfo,
   updateStaffInfo,
+  getListUsers,
 } = require("../controllers/profileController");
 
+router.get("/", getListUsers);
 router.get("/:id", getUserInfo);
 router.put("/:id", addUserInfo);
 router.put("/change-password/:id", changePassword);

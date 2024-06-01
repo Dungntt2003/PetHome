@@ -1,3 +1,5 @@
+const getAllUsers = "SELECT id, name, phone FROM person";
+
 const insertUserInfo =
   "UPDATE person SET name = $1, dob = $2, gender = $3, phone = $4, address = $5 where id = $6";
 
@@ -18,6 +20,7 @@ const getInfoStaff =
 const updateInfoStaff =
   "UPDATE staff SET dob = $1,  gender = $2 , phone = $3, address = $4 where id = $5";
 module.exports = {
+  getAllUsers,
   insertUserInfo,
   updatePass,
   getInfo,

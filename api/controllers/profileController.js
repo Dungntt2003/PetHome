@@ -2,6 +2,7 @@ const pool = require("../../db");
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
 const {
+  getAllUsers,
   insertUserInfo,
   updatePass,
   getInfo,
@@ -10,6 +11,16 @@ const {
   getInfoStaff,
   updateInfoStaff,
 } = require("../queries/profileQuery");
+
+const getListUsers = (req, res, next) => {
+  pool.query(getAllUsers, (err, result) => {
+    if (err) {
+      res.status(500).json({ error: err.message });
+    } else {
+      res.status(200).json(result.rows);
+    }
+  });
+};
 
 const addUserInfo = (req, res, next) => {
   // name, dob,gender,phone, address
@@ -131,4 +142,5 @@ module.exports = {
   updateDoctorInfo,
   getStaffInfo,
   updateStaffInfo,
+  getListUsers,
 };
