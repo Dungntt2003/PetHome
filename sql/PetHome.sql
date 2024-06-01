@@ -275,4 +275,6 @@ create table bookschedule (
 );
 select * from bookschedule;
 
+ALTER TABLE bookschedule
+ALTER COLUMN bookDate TYPE timestamp;
 
