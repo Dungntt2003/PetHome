@@ -251,6 +251,7 @@ create table bookschedule (
 	id SERIAL PRIMARY KEY,
 	pet_id int,
 	bookDate timestamp,
+	endTime timestamp,
 	result varchar(500) default 'Đang xét duyệt',
 	service_id varchar(10),
 	money real,
@@ -289,8 +290,6 @@ create table cage(
 	hotel_id varchar(10),
 	foreign key (hotel_id) references hotel(id)
 );
-
-
 
 
 -- create table for medical examination process
