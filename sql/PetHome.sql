@@ -220,19 +220,6 @@ insert into hotel (id, diet, takeExercise,airconditioning, heating, clean, camer
 ('HO13', '2 bữa/ngày. Thức ăn là cơm thịt rau, hạt ANF','Trên 1h/ ngày', true,true,'3 ngày/lần. Sau 5 ngày thú cưng được tắm miễn phí','không có' ),
 ('HO14', '2 bữa/ngày. Thức ăn là cơm thịt rau, hạt ANF','1-2h/ngày', true, true, '1h/lần, tắm trọn gói 3 ngày/lần', 'Camera chỉ có chức năng ghi hình');
 drop table hotel;
-create table inhotel (
-	id SERIAL PRIMARY KEY,
-	pet_id int,
-	starttime date,
-	endtime date,
-	hotel_id varchar(10),
-	foreign key (pet_id) references pet(id),
-	foreign key (hotel_id) references hotel(id),
-	unique (id, pet_id, starttime)
-);
-insert into inhotel (hotel_id) values ('HO13'), ('HO13') , ('HO13') , 
-('HO13') , ('HO13') , ('HO14') , ('HO14') , ('HO14') , ('HO14') , ('HO14') ;
-select * from inhotel;
 
 
 -- create trigger when delete sservice_item
@@ -263,20 +250,47 @@ DROP TRIGGER emp_service ON service_item;
 create table bookschedule (
 	id SERIAL PRIMARY KEY,
 	pet_id int,
-	doctor_id int,
-	bookDate date,
+	bookDate timestamp,
 	result varchar(500) default 'Đang xét duyệt',
-	type varchar(10),
+	service_id varchar(10),
+	money real,
+	note varchar(500),
 	 CONSTRAINT check_date CHECK (bookDate >= CURRENT_DATE),
 	foreign key (pet_id) references pet(id),
-	foreign key (doctor_id) references doctor(id),
-	foreign key (type) references service_item(id),
-	unique (pet_id, bookDate, type)
+	foreign key (service_id) references service_item(id),
+	unique (pet_id, bookDate, service_id)
 );
 select * from bookschedule;
+create table bookSalon (
+	id int primary key,
+	staff_id int,
+	foreign key (id) references bookschedule(id),
+	foreign key (staff_id) references staff(id)
+);
+select * from bookSalon;
+create table bookHealth (
+	id int primary key,
+	doctor_id int,
+	foreign key (id) references bookschedule(id),
+	foreign key (doctor_id) references doctor(id)
+);
 
-ALTER TABLE bookschedule
-ALTER COLUMN bookDate TYPE timestamp;
+select * from bookHealth;
+
+create table bookHotel (
+	id int primary key,
+	endDate date,
+	cage_id int,
+	foreign key (cage_id) references cage(cage_id)
+);
+
+create table cage(
+	cage_id int primary key,
+	hotel_id varchar(10),
+	foreign key (hotel_id) references hotel(id)
+);
+
+
 
 
 -- create table for medical examination process

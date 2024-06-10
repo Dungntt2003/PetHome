@@ -19,6 +19,9 @@ const getInfoStaff =
 
 const updateInfoStaff =
   "UPDATE staff SET dob = $1,  gender = $2 , phone = $3, address = $4 where id = $5";
+
+const getDoctor = "SELECT * FROM doctor";
+const getStaff = "SELECT * FROM staff";
 module.exports = {
   getAllUsers,
   insertUserInfo,
@@ -28,4 +31,6 @@ module.exports = {
   updateInfoDoctor,
   getInfoStaff,
   updateInfoStaff,
+  getDoctor,
+  getStaff,
 };

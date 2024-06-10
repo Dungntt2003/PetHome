@@ -10,6 +10,8 @@ const {
   updateInfoDoctor,
   getInfoStaff,
   updateInfoStaff,
+  getDoctor,
+  getStaff,
 } = require("../queries/profileQuery");
 
 const getListUsers = (req, res, next) => {
@@ -134,6 +136,31 @@ const updateStaffInfo = (req, res, next) => {
     }
   );
 };
+
+const getListDoctors = (req, res, next) => {
+  pool.query(getDoctor, (err, result) => {
+    if (err) {
+      res.status(500).json({
+        message: err.message,
+      });
+    } else {
+      res.status(200).json(result.rows);
+    }
+  });
+};
+
+const getListStaff = (req, res, next) => {
+  pool.query(getStaff, (err, result) => {
+    if (err) {
+      res.status(500).json({
+        message: err.message,
+      });
+    } else {
+      res.status(200).json(result.rows);
+    }
+  });
+};
+
 module.exports = {
   addUserInfo,
   changePassword,
@@ -143,4 +170,6 @@ module.exports = {
   getStaffInfo,
   updateStaffInfo,
   getListUsers,
+  getListDoctors,
+  getListStaff,
 };
