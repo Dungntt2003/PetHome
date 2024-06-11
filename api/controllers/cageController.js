@@ -1,4 +1,12 @@
 const pool = require("../../db");
-const {} = require("../queries/cageQuery");
+const {
+  insertCage,
+  getCage,
+  getCageHotel,
+  getFreeHotel,
+  getDeadHotel,
+  upgradeCage,
+  deleteCage,
+} = require("../queries/cageQuery");
 
 module.exports = {};

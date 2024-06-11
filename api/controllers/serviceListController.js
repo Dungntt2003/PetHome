@@ -16,6 +16,9 @@ const {
   updateHealthService,
   updateSalonService,
   updateHotelService,
+  getDetailHealth,
+  getDetailHotel,
+  getDetailSalon,
 } = require("../queries/serviceListQuery");
 
 const getAllDataServices = (req, res, next) => {
@@ -338,6 +341,40 @@ const deleteServiceById = (req, res, next) => {
       });
   });
 };
+
+const getAHotel = (req, res, next) => {
+  const id = req.params.id;
+  pool.query(getDetailHotel, [id], (err, result) => {
+    if (err) {
+      res.status(500).json({
+        message: err.message,
+      });
+    } else res.status(200).json(result.rows);
+  });
+};
+
+const getAHealth = (req, res, next) => {
+  const id = req.params.id;
+  pool.query(getDetailHealth, [id], (err, result) => {
+    if (err) {
+      res.status(500).json({
+        message: err.message,
+      });
+    } else res.status(200).json(result.rows);
+  });
+};
+
+const getASalon = (req, res, next) => {
+  const id = req.params.id;
+  pool.query(getDetailSalon, [id], (err, result) => {
+    if (err) {
+      res.status(500).json({
+        message: err.message,
+      });
+    } else res.status(200).json(result.rows);
+  });
+};
+
 module.exports = {
   getAllDataServices,
   createNewService,
@@ -353,4 +390,7 @@ module.exports = {
   getHealth,
   getSalon,
   getHotel,
+  getAHealth,
+  getAHotel,
+  getASalon,
 };

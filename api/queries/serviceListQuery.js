@@ -4,6 +4,14 @@ const getHealthService = "SELECT * FROM sicktype join service_item using (id)";
 const getSalonService =
   "SELECT * FROM servicetype join service_item using (id)";
 const getHotelService = "SELECT * FROM hotel join service_item using (id)";
+
+const getDetailHotel =
+  "SELECT * FROM service_item join hotel using (id) where id = $1";
+const getDetailSalon =
+  "SELECT * FROM servicetype join service_item using (id) where id = $1";
+const getDetailHealth =
+  "SELECT * FROM sicktype join service_item using (id) where id = $1";
+
 const insertNewService =
   "INSERT INTO service_list (name, introduction) VALUES ($1,$2) RETURNING id";
 const insertSubService =
@@ -42,4 +50,7 @@ module.exports = {
   updateHealthService,
   updateHotelService,
   updateSalonService,
+  getDetailHealth,
+  getDetailHotel,
+  getDetailSalon,
 };

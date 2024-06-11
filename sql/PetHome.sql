@@ -236,7 +236,7 @@ CREATE OR REPLACE FUNCTION process_emp_service() RETURNS TRIGGER AS $$
     WHERE hotel.id = OLD.id;
     
     DELETE FROM bookschedule
-    WHERE bookschedule.type = OLD.id;
+    WHERE bookschedule.service_id = OLD.id;
 	RETURN OLD;
     END;
 $$ LANGUAGE plpgsql;
@@ -292,6 +292,7 @@ create table cage(
 	foreign key (hotel_id) references hotel(id)
 );
 
+select * from cage;
 
 -- create table for medical examination process
 create table medicalProcess (
@@ -331,3 +332,29 @@ create table medicalProcess (
 );
 
 select * from medicalProcess;
+
+-- make trigger when delete bookschedule
+
+CREATE OR REPLACE FUNCTION process_delete_bookschedule() RETURNS TRIGGER AS $$
+    BEGIN
+         DELETE FROM bookHealth
+    WHERE bookHealth.id = OLD.id;
+
+    DELETE FROM bookSalon
+    WHERE bookSalon.id = OLD.id;
+
+    DELETE FROM bookHotel
+    WHERE bookHotel.id = OLD.id;
+
+	RETURN OLD;
+    END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER delete_bookschedule
+BEFORE DELETE ON bookschedule
+FOR EACH ROW EXECUTE FUNCTION process_delete_bookschedule();
+
+
+
+
+

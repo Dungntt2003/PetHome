@@ -22,7 +22,7 @@ router.get("salon", getBookListSalon);
 router.get("/hotel", getBookListHotel);
 router.get("/health", getBookListHealth);
 router.post("/salon", createNewSalon);
-router.post("/heath", createNewHealth);
+router.post("/health", createNewHealth);
 router.post("/hotel", createNewHotel);
 router.put("/result/:id", updateResult);
 router.put("/:id", updateScheduleById);

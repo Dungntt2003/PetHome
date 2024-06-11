@@ -15,6 +15,9 @@ const {
   getSalon,
   getHealth,
   getHotel,
+  getAHealth,
+  getAHotel,
+  getASalon,
 } = require("../controllers/serviceListController");
 
 router.get("/", getAllDataServices);
@@ -23,6 +26,9 @@ router.get("/:id", getServiceById);
 router.get("/health", getHealth);
 router.get("/salon", getSalon);
 router.get("/hotel", getHotel);
+router.get("/salon/:id", getASalon);
+router.get("/hotel/:id", getAHotel);
+router.get("/health/:id", getAHealth);
 router.post("/health", createHealthService);
 router.post("/salon", createSalonService);
 router.post("/hotel", createHotelService);
