@@ -6,7 +6,7 @@ const createSalon = "INSERT INTO bookSalon (id, staff_id) VALUES ($1, $2)";
 const createHealth = "INSERT INTO bookHealth (id, doctor_id) VALUES ($1, $2)";
 
 const createHotel =
-  "INSERT INTO bookHotel (id, endDate, cage_id) VALUES ($1, $2, $3)";
+  "INSERT INTO bookHotel (id, endTime, cage_id) VALUES ($1, $2, $3)";
 
 const resultSchedule =
   "UPDATE bookschedule SET result = $1, note = $2, endTime = $3 where id = $4";
@@ -15,7 +15,7 @@ const updateSchedule =
   "UPDATE bookschedule SET pet_id = $1, bookDate = $2, note = $3, post_date = CURRENT_TIMESTAMP where id =  $4";
 
 const updateHotel =
-  "UPDATE bookHotel SET endDate = $1, post_date = CURRENT_TIMESTAMP where id = $2";
+  "UPDATE bookHotel SET endTime = $1, post_date = CURRENT_TIMESTAMP where id = $2";
 
 const getScheduleUser =
   "SELECT * FROM bookschedule join pet on bookschedule.pet_id = pet.id where owner_id = $1";
