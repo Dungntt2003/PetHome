@@ -255,6 +255,7 @@ create table bookschedule (
 	result varchar(500) default 'Đang xét duyệt',
 	service_id varchar(10),
 	money real,
+	post_date timestamp DEFAULT CURRENT_TIMESTAMP,
 	note varchar(500),
 	 CONSTRAINT check_date CHECK (bookDate >= CURRENT_DATE),
 	foreign key (pet_id) references pet(id),

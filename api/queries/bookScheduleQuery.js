@@ -12,9 +12,10 @@ const resultSchedule =
   "UPDATE bookschedule SET result = $1, note = $2, endTime = $3 where id = $4";
 
 const updateSchedule =
-  "UPDATE bookschedule SET pet_id = $1, bookDate = $2, note = $3 where id =  $4";
+  "UPDATE bookschedule SET pet_id = $1, bookDate = $2, note = $3, post_date = CURRENT_TIMESTAMP where id =  $4";
 
-const updateHotel = "UPDATE bookHotel SET endDate = $1 where id = $2";
+const updateHotel =
+  "UPDATE bookHotel SET endDate = $1, post_date = CURRENT_TIMESTAMP where id = $2";
 
 const getScheduleUser =
   "SELECT * FROM bookschedule join pet on bookschedule.pet_id = pet.id where owner_id = $1";
