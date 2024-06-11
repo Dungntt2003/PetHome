@@ -15,9 +15,9 @@ const {
   getBookListHotel,
 } = require("../controllers/bookScheduleController");
 
-router.get("/staff", getListBookStaff);
-router.get("/", getListBookUser);
-router.get("/doctor", getListBookDoctor);
+router.get("/staff/:id", getListBookStaff);
+router.get("/:id", getListBookUser);
+router.get("/doctor/:id", getListBookDoctor);
 router.get("salon", getBookListSalon);
 router.get("/hotel", getBookListHotel);
 router.get("/health", getBookListHealth);
