@@ -206,7 +206,7 @@ const getListUserHealth = (req, res, next) => {
       res.status(500).json({
         message: err.message,
       });
-    } else result.status(200).json(result.rows);
+    } else res.status(200).json(result.rows);
   });
 };
 
@@ -217,7 +217,7 @@ const getListUserHotel = (req, res, next) => {
       res.status(500).json({
         message: err.message,
       });
-    } else result.status(200).json(result.rows);
+    } else res.status(200).json(result.rows);
   });
 };
 const getListUserSalon = (req, res, next) => {
@@ -227,7 +227,7 @@ const getListUserSalon = (req, res, next) => {
       res.status(500).json({
         message: err.message,
       });
-    } else result.status(200).json(result.rows);
+    } else res.status(200).json(result.rows);
   });
 };
 
