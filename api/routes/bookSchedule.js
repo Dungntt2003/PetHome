@@ -9,18 +9,22 @@ const {
   updateHotelBook,
   getListBookDoctor,
   getListBookStaff,
-  getListBookUser,
   getBookListHealth,
   getBookListSalon,
   getBookListHotel,
+  getListUserHealth,
+  getListUserSalon,
+  getListUserHotel,
 } = require("../controllers/bookScheduleController");
 
 router.get("/staff/:id", getListBookStaff);
-router.get("/:id", getListBookUser);
 router.get("/doctor/:id", getListBookDoctor);
 router.get("salon", getBookListSalon);
 router.get("/hotel", getBookListHotel);
 router.get("/health", getBookListHealth);
+router.get("/health/:id", getListUserHealth);
+router.get("/hotel/:id", getListUserHotel);
+router.get("/salon/:id", getListUserSalon);
 router.post("/salon", createNewSalon);
 router.post("/health", createNewHealth);
 router.post("/hotel", createNewHotel);

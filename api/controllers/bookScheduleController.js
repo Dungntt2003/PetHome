@@ -8,11 +8,13 @@ const {
   updateSchedule,
   updateHotel,
   getScheduleDoctor,
-  getScheduleUser,
   getScheduleStaff,
   getBookHealth,
   getBookSalon,
   getBookHotel,
+  getScheduleUserHealth,
+  getScheduleUserHotel,
+  getScheduleUserSalon,
 } = require("../queries/bookScheduleQuery");
 
 const createNewHealth = (req, res, next) => {
@@ -197,16 +199,35 @@ const getListBookStaff = (req, res, next) => {
   });
 };
 
-const getListBookUser = (req, res, next) => {
+const getListUserHealth = (req, res, next) => {
   const id = req.params.id;
-  pool.query(getScheduleUser, [id], (err, result) => {
+  pool.query(getScheduleUserHealth, [id], (err, result) => {
     if (err) {
       res.status(500).json({
         message: err.message,
       });
-    } else {
-      res.status(200).json(result.rows);
-    }
+    } else result.status(200).json(result.rows);
+  });
+};
+
+const getListUserHotel = (req, res, next) => {
+  const id = req.params.id;
+  pool.query(getScheduleUserHotel, [id], (err, result) => {
+    if (err) {
+      res.status(500).json({
+        message: err.message,
+      });
+    } else result.status(200).json(result.rows);
+  });
+};
+const getListUserSalon = (req, res, next) => {
+  const id = req.params.id;
+  pool.query(getScheduleUserSalon, [id], (err, result) => {
+    if (err) {
+      res.status(500).json({
+        message: err.message,
+      });
+    } else result.status(200).json(result.rows);
   });
 };
 
@@ -262,8 +283,10 @@ module.exports = {
   updateHotelBook,
   getListBookDoctor,
   getListBookStaff,
-  getListBookUser,
   getBookListHealth,
   getBookListHotel,
   getBookListSalon,
+  getListUserHealth,
+  getListUserHotel,
+  getListUserSalon,
 };

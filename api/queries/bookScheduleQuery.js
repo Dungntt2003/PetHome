@@ -17,8 +17,13 @@ const updateSchedule =
 const updateHotel =
   "UPDATE bookHotel SET endTime = $1, post_date = CURRENT_TIMESTAMP where id = $2";
 
-const getScheduleUser =
-  "SELECT * FROM bookschedule join pet on bookschedule.pet_id = pet.id where owner_id = $1";
+const getScheduleUserHotel =
+  "SELECT * FROM bookschedule join pet on bookschedule.pet_id = pet.id join bookHotel on bookHotel.id = bookschedule.id where owner_id = $1";
+const getScheduleUserHealth = `SELECT * FROM bookschedule join pet on bookschedule.pet_id = pet.id 
+                                join bookHealth on bookHealth.id = bookschedule.id where owner_id = $1`;
+const getScheduleUserSalon = `SELECT * FROM bookschedule join pet on bookschedule.pet_id = pet.id 
+                                join bookSalon on bookSalon.id = bookschedule.id where owner_id = $1`;
+
 const getScheduleStaff =
   "SELECT * FROM bookschedule join bookSalon on bookschedule.id = bookSalon.id WHERE staff_id = $1";
 const getScheduleDoctor =
@@ -41,7 +46,9 @@ module.exports = {
   updateHotel,
   getScheduleDoctor,
   getScheduleStaff,
-  getScheduleUser,
+  getScheduleUserHealth,
+  getScheduleUserHotel,
+  getScheduleUserSalon,
   getBookSalon,
   getBookHealth,
   getBookHotel,
