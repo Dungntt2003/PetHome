@@ -355,4 +355,3 @@ BEFORE DELETE ON bookschedule
 FOR EACH ROW EXECUTE FUNCTION process_delete_bookschedule();
   
 
-
