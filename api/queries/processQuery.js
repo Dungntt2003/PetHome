@@ -16,7 +16,7 @@ const getAProcess =
 const getProcessDoctor =
   "SELECT * FROM pet join medicalProcess on pet.id = medicalProcess.pet_id WHERE doctor-id = $1";
 const getProcessPet =
-  "SELECT * FROM medicalProcess join doctor on medicalProcess.doctor_id = doctor.id WHERE pet_id = $1";
+  "SELECT * FROM medicalProcess join doctor on medicalProcess.doctor_id = doctor.id WHERE pet_id = $1 ORDER BY post_date ASC";
 
 module.exports = {
   insertProcess,
