@@ -28,7 +28,7 @@ CREATE table doctor (
 	achievements varchar(255),
 	experienceYear int
 );
-
+select * from doctor;
 -- create trigger for update experience year when new year
 
 CREATE OR REPLACE FUNCTION update_experience_year()
@@ -409,5 +409,6 @@ select * from priceExchange;
 select * from bookschedule;
 select * from bookHotel;
 
+SELECT * FROM medicalProcess join doctor on medicalProcess.doctor_id = doctor.id ORDER BY post_date ASC
 
   

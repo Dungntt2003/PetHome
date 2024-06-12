@@ -12,11 +12,11 @@ const updateProcess = `UPDATE medicalProcess SET pet_id = $1, doctor_id = $2, ty
     practice_level = $29, re_examDay = $30, post_date = CURRENT_TIMESTAMP WHERE id = $31`;
 
 const getAProcess =
-  "SELECT * FROM pet join (medicalProcess join doctor on medicalProcess.doctor_id = doctor.id) on medicalProcess.pet_id = pet.id WHERE id = $1";
+  "SELECT * FROM pet join (medicalProcess join doctor on medicalProcess.doctor_id = doctor.id) on medicalProcess.pet_id = pet.id WHERE medicalProcess.id = $1";
 const getProcessDoctor =
-  "SELECT * FROM pet join medicalProcess on pet.id = medicalProcess.pet_id WHERE doctor-id = $1";
+  "SELECT medicalProcess.id FROM pet join medicalProcess on pet.id = medicalProcess.pet_id WHERE doctor_id = $1";
 const getProcessPet =
-  "SELECT * FROM medicalProcess join doctor on medicalProcess.doctor_id = doctor.id WHERE pet_id = $1 ORDER BY post_date ASC";
+  "SELECT medicalProcess.id FROM medicalProcess join doctor on medicalProcess.doctor_id = doctor.id WHERE pet_id = $1 ORDER BY post_date ASC";
 
 module.exports = {
   insertProcess,
