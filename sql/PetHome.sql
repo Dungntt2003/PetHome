@@ -327,10 +327,13 @@ create table medicalProcess (
 	practice varchar(100),
 	practice_time varchar(100),
 	practice_level varchar(100),
-	re_examDay timestamp
+	re_examDay timestamp,
+	foreign key (pet_id) references pet(id),
+	foreign key (doctor_id) references doctor(id)
 );
 
 select * from medicalProcess;
+
 
 -- make trigger when delete bookschedule
 
@@ -352,4 +355,49 @@ $$ LANGUAGE plpgsql;
 CREATE TRIGGER delete_bookschedule
 BEFORE DELETE ON bookschedule
 FOR EACH ROW EXECUTE FUNCTION process_delete_bookschedule();
+
+-- create trigger set cage_id = null when delete cage 
+CREATE OR REPLACE FUNCTION set_bookschedule_cage_id_to_null()
+RETURNS TRIGGER AS $$
+BEGIN
+    UPDATE bookHotel
+    SET cage_id = NULL
+    WHERE cage_id = OLD.cage_id;
+    RETURN OLD;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER set_bookschedule_cage_id_to_null_trigger
+BEFORE DELETE ON cage
+FOR EACH ROW
+EXECUTE FUNCTION set_bookschedule_cage_id_to_null();
+
+-- create trigger delete when pet is deleted 
+CREATE OR REPLACE FUNCTION delete_pet() RETURNS TRIGGER AS $$
+    BEGIN
+         DELETE FROM bookschedule
+    WHERE bookHealth.pet_id = OLD.id;
+
+    DELETE FROM medicalProcess
+    WHERE medicalProcess.pet_id = OLD.id;
+
+	RETURN OLD;
+    END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER delete_pet
+BEFORE DELETE ON pet
+FOR EACH ROW EXECUTE FUNCTION delete_pet();
+
+-- create table for price exchange
+create table priceExchange (
+	id serial primary key,
+	weight real,
+	factor real
+);
+
+insert into priceExchange (weight, factor) values 
+(2,1),(5, 1.2),(10, 1.5),(15, 1.8),(20,2);
+
+select * from priceExchange;
   

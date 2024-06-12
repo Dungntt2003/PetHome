@@ -11,7 +11,7 @@ const {
 router.get("/:id", getProcessById);
 router.post("/", createNewProcess);
 router.put("/:id", updateProcessById);
-router.get("/doctor", getProcessForDoctor);
-router.get("/pet", getProcessForPet);
+router.get("/doctor/:doctor_id", getProcessForDoctor);
+router.get("/pet/:pet", getProcessForPet);
 
 module.exports = router;
