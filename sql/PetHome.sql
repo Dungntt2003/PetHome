@@ -287,11 +287,11 @@ create table bookHotel (
 );
 
 create table cage(
-	cage_id int primary key,
+	cage_id serial primary key,
 	hotel_id varchar(10),
 	foreign key (hotel_id) references hotel(id)
 );
-
+DROP TABLE IF EXISTS cage CASCADE;
 
 select * from cage;
 
@@ -401,4 +401,5 @@ insert into priceExchange (weight, factor) values
 (2,1),(5, 1.2),(10, 1.5),(15, 1.8),(20,2);
 
 select * from priceExchange;
+
   

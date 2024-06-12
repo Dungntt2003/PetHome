@@ -12,7 +12,7 @@ const {
 } = require("../queries/cageQuery");
 
 const createNewCage = (req, res, next) => {
-  const hotel_id = req.params.hotel_id;
+  const hotel_id = req.body.hotel_id;
   pool.query(insertCage, [hotel_id], (err, result) => {
     if (err) {
       res.status(500).json({
