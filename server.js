@@ -10,6 +10,7 @@ const bookDate = require("./api/routes/bookSchedule");
 const ServiceRoute = require("./api/routes/serviceList");
 const profileRoute = require("./api/routes/profile");
 const cageRoute = require("./api/routes/cage");
+const processRoute = require("./api/routes/process");
 
 app.use(express.json());
 app.use(morgan("combined"));
@@ -34,6 +35,7 @@ app.use("/services", ServiceRoute);
 app.use("/bookDate", bookDate);
 app.use("/profile", profileRoute);
 app.use("/cages", cageRoute);
+app.use("/process", processRoute);
 app.use("/", LoginRoute);
 
 app.listen(port, () => {

@@ -299,8 +299,7 @@ create table medicalProcess (
 	id serial primary key,
 	pet_id int,
 	doctor_id int,
-	startTime timestamp,
-	endTime timestamp,
+	post_date timestamp default CURRENT_TIMESTAMP,
 	type varchar(10),
 	symptom varchar(100),
 	behavior_change varchar(100),
@@ -354,4 +353,3 @@ CREATE TRIGGER delete_bookschedule
 BEFORE DELETE ON bookschedule
 FOR EACH ROW EXECUTE FUNCTION process_delete_bookschedule();
   
-

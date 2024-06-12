@@ -1,0 +1,212 @@
+const pool = require("../../db");
+const {
+  insertProcess,
+  updateProcess,
+  getProcessDoctor,
+  getProcessPet,
+  getAProcess,
+} = require("../queries/processQuery");
+
+const createNewProcess = (req, res, next) => {
+  const {
+    pet_id,
+    doctor_id,
+    type,
+    symptom,
+    behavior_change,
+    energy,
+    weight,
+    skin_check,
+    nose_check,
+    temperature,
+    heart_beat,
+    breath_beat,
+    touch_check,
+    blood_check,
+    urine_check,
+    digest_check,
+    stool_check,
+    supersonic,
+    x_ray,
+    sick,
+    medicine_name,
+    amount,
+    note,
+    diet,
+    diet_amount,
+    diet_time,
+    practice,
+    practice_time,
+    practice_level,
+    re_examDay,
+  } = req.body;
+  pool.query(
+    insertProcess,
+    [
+      pet_id,
+      doctor_id,
+      type,
+      symptom,
+      behavior_change,
+      energy,
+      weight,
+      skin_check,
+      nose_check,
+      temperature,
+      heart_beat,
+      breath_beat,
+      touch_check,
+      blood_check,
+      urine_check,
+      digest_check,
+      stool_check,
+      supersonic,
+      x_ray,
+      sick,
+      medicine_name,
+      amount,
+      note,
+      diet,
+      diet_amount,
+      diet_time,
+      practice,
+      practice_time,
+      practice_level,
+      re_examDay,
+    ],
+    (err, result) => {
+      if (err) {
+        res.status(500).json({
+          message: err.message,
+        });
+      } else
+        res.status(200).json({
+          message: "Create medical process successfully",
+          id: result.rows[0].id,
+        });
+    }
+  );
+};
+
+const updateProcessById = (req, res, next) => {
+  const {
+    pet_id,
+    doctor_id,
+    type,
+    symptom,
+    behavior_change,
+    energy,
+    weight,
+    skin_check,
+    nose_check,
+    temperature,
+    heart_beat,
+    breath_beat,
+    touch_check,
+    blood_check,
+    urine_check,
+    digest_check,
+    stool_check,
+    supersonic,
+    x_ray,
+    sick,
+    medicine_name,
+    amount,
+    note,
+    diet,
+    diet_amount,
+    diet_time,
+    practice,
+    practice_time,
+    practice_level,
+    re_examDay,
+  } = req.body;
+  const id = req.params.id;
+  pool.query(
+    updateProcess,
+    [
+      pet_id,
+      doctor_id,
+      type,
+      symptom,
+      behavior_change,
+      energy,
+      weight,
+      skin_check,
+      nose_check,
+      temperature,
+      heart_beat,
+      breath_beat,
+      touch_check,
+      blood_check,
+      urine_check,
+      digest_check,
+      stool_check,
+      supersonic,
+      x_ray,
+      sick,
+      medicine_name,
+      amount,
+      note,
+      diet,
+      diet_amount,
+      diet_time,
+      practice,
+      practice_time,
+      practice_level,
+      re_examDay,
+      id,
+    ],
+    (err, result) => {
+      if (err) {
+        res.status(500).json({
+          message: err.message,
+        });
+      } else
+        res.status(200).json({
+          message: "Update process successfully",
+        });
+    }
+  );
+};
+
+const getProcessById = (req, res, next) => {
+  const id = req.params.id;
+  pool.query(getAProcess, [id], (err, result) => {
+    if (err) {
+      res.status(500).json({
+        message: err.message,
+      });
+    } else res.status(200).json(result.rows);
+  });
+};
+
+const getProcessForDoctor = (req, res, next) => {
+  const doctor_id = req.params.doctor_id;
+  pool.query(getProcessDoctor, [doctor_id], (err, result) => {
+    if (err)
+      res.status(500).json({
+        message: err.message,
+      });
+    else res.status(200).json(result.rows);
+  });
+};
+
+const getProcessForPet = (req, res, next) => {
+  const pet_id = req.params.pet_id;
+  pool.query(getProcessPet, [pet_id], (err, result) => {
+    if (err)
+      res.status(500).json({
+        message: err.message,
+      });
+    else res.status(200).json(result.rows);
+  });
+};
+
+module.exports = {
+  createNewProcess,
+  updateProcessById,
+  getProcessById,
+  getProcessForDoctor,
+  getProcessForPet,
+};
