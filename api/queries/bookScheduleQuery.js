@@ -6,7 +6,7 @@ const createSalon = "INSERT INTO bookSalon (id, staff_id) VALUES ($1, $2)";
 const createHealth = "INSERT INTO bookHealth (id, doctor_id) VALUES ($1, $2)";
 
 const createHotel =
-  "INSERT INTO bookHotel (id, endTime, cage_id) VALUES ($1, $2, $3)";
+  "INSERT INTO bookHotel (id, endDate, cage_id) VALUES ($1, $2, $3)";
 
 const resultSchedule =
   "UPDATE bookschedule SET result = $1, note = $2, endTime = $3 where id = $4";

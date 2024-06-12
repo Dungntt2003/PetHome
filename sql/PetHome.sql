@@ -283,9 +283,12 @@ create table bookHotel (
 	id int primary key,
 	endDate date,
 	cage_id int,
+	foreign key (id) references bookschedule(id),
 	foreign key (cage_id) references cage(cage_id)
+	
 );
-
+drop table bookHotel;
+select * from bookHotel;
 create table cage(
 	cage_id serial primary key,
 	hotel_id varchar(10),
@@ -402,6 +405,9 @@ insert into priceExchange (weight, factor) values
 
 select * from priceExchange;
 
+
+select * from bookschedule;
+select * from bookHotel;
 
 
   
