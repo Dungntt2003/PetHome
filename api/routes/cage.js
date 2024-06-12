@@ -8,12 +8,14 @@ const {
   getDeadlineCage,
   updateCage,
   deleteCageById,
+  getLivePet,
 } = require("../controllers/cageController");
 
 router.get("/", getAllCages);
 router.get("/type", getAllType);
 router.get("/free", getFreeCages);
 router.get("/stop", getDeadlineCage);
+router.get("/live", getLivePet);
 router.post("/", createNewCage);
 router.put("/:id", updateCage);
 router.delete("/:id", deleteCageById);

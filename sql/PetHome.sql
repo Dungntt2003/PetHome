@@ -292,6 +292,7 @@ create table cage(
 	foreign key (hotel_id) references hotel(id)
 );
 
+
 select * from cage;
 
 -- create table for medical examination process
@@ -360,11 +361,11 @@ FOR EACH ROW EXECUTE FUNCTION process_delete_bookschedule();
 CREATE OR REPLACE FUNCTION set_bookschedule_cage_id_to_null()
 RETURNS TRIGGER AS $$
 BEGIN
-    UPDATE bookHotel
-    SET cage_id = NULL
-    WHERE cage_id = OLD.cage_id;
-    RETURN OLD;
-END;
+         DELETE FROM bookHotel
+    WHERE bookHotel.cage_id = OLD.cage_id;
+
+	RETURN OLD;
+    END;
 $$ LANGUAGE plpgsql;
 
 CREATE TRIGGER set_bookschedule_cage_id_to_null_trigger

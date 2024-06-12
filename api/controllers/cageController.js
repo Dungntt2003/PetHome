@@ -8,6 +8,7 @@ const {
   getDeadHotel,
   upgradeCage,
   deleteCage,
+  getLiveCage,
 } = require("../queries/cageQuery");
 
 const createNewCage = (req, res, next) => {
@@ -94,6 +95,16 @@ const deleteCageById = (req, res, next) => {
       });
   });
 };
+
+const getLivePet = (req, res, next) => {
+  pool.query(getLiveCage, (err, result) => {
+    if (err) {
+      res.status(500).json({
+        message: err.message,
+      });
+    } else res.status(200).json(result.rows);
+  });
+};
 module.exports = {
   createNewCage,
   getAllCages,
@@ -102,4 +113,5 @@ module.exports = {
   getDeadlineCage,
   updateCage,
   deleteCageById,
+  getLivePet,
 };
