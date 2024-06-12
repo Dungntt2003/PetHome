@@ -402,4 +402,6 @@ insert into priceExchange (weight, factor) values
 
 select * from priceExchange;
 
+
+
   

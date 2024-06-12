@@ -9,7 +9,7 @@ const getFreeHotel = `SELECT DISTINCT cage.cage_id FROM cage LEFT JOIN bookHotel
                         WHERE endDate <= CURRENT_DATE OR endDate is null`;
 
 const getDeadHotel =
-  'SELECT * FROM cage join bookHotel on cage.cage_id = bookHotel.cage_id where endDate = current_date - interval "1 day" and endDate is not null';
+  "SELECT * FROM cage join bookHotel on cage.cage_id = bookHotel.cage_id where endDate = current_date and endDate is not null";
 
 const upgradeCage = "UPDATE cage set hotel_id = $1 where cage_id = $2";
 
